@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+}
+header {
+    background-color: #da6d38;
+    padding: 30px;
+    color: white;
+    font-family: sans-serif;
+    padding-left: 120px;
+    display: flex;
+}
+
+h1 {
+    text-transform: uppercase;
+}
+
+.header {
+    text-decoration: none;
+    color: white;
+    font-family: sans-serif;
+    font-size: 27px;
+    padding: 5px;
+    padding-left: 740px;
+}
+
+.main
+{
+    width: 100%;
+    height: 85vh;
+    display: flex;
+}
+#mapdiv
+{
+    width: 70%;
+}
+.data{
+    width: 20%;
+    background-color: white;
+    padding: 60px 40px;
+}
+table
+{
+    margin-top: 20px;
+    padding: 0 20px;
+}

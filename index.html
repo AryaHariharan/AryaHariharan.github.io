@@ -1,0 +1,73 @@
+<html><body>
+    <head>
+		<title> Customer Details </title>
+		<link rel="stylesheet" href="user_home.css" />
+    </head>
+    <header>
+        <h1> fisherman safety </h1>
+        <a class="header" href="home.html"> Log Out </a> 
+      </header>
+    <div class="main">
+     <div id="mapdiv"></div>
+    <div class="data">
+        <h2>Latest Data</h2><br>
+        <p>Updated at: <i id="updated_at">Unkown</i></p>
+        <a href="history.html">See history</a>
+        <table>
+            <tr><td>Attendence</td><td id="Attendence"></td></tr>
+            <tr><td>Latitude</td><td id="Latitude"></td></tr>
+            <tr><td>Longitude</td><td id="Longitude"></td></tr>
+            <tr><td>Preassure</td><td id="Preassure">mb</td></tr>
+            <tr><td>Temperature</td><td id="Temperature">°C</td></tr>
+            <tr><td>Terbulance</td><td id="Terbulance"></td></tr>
+        </table>
+    </div>
+    </div>
+  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+  <script>
+    var xmlhttp = new XMLHttpRequest(), x ;
+    var lat =0.0, lon=0.0;
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var myObj = JSON.parse(this.responseText);
+        var Preassure=myObj.feeds[0].field5+"mb";
+        var Temperature= myObj.feeds[0].field6+"°C";
+        document.getElementById("updated_at").innerHTML=myObj.feeds[0].created_at;
+        document.getElementById("Attendence").innerHTML=myObj.feeds[0].field1;
+        document.getElementById("Terbulance").innerHTML=myObj.feeds[0].field2;
+        document.getElementById("Latitude").innerHTML=myObj.feeds[0].field3;
+        document.getElementById("Longitude").innerHTML=myObj.feeds[0].field4;
+        document.getElementById("Preassure").innerHTML=Preassure;
+        document.getElementById("Temperature").innerHTML=Temperature;
+        lat=parseFloat(myObj.feeds[0].field3);
+        lon=parseFloat(myObj.feeds[0].field4);
+
+        map = new OpenLayers.Map("mapdiv");
+        map.addLayer(new OpenLayers.Layer.OSM());
+
+        var lonLat = new OpenLayers.LonLat( lon, lat)
+              .transform(
+                new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+                map.getProjectionObject() // to Spherical Mercator Projection
+              );
+        var zoom=14;
+
+        var markers = new OpenLayers.Layer.Markers( "Markers" );
+        map.addLayer(markers);
+        
+        markers.addMarker(new OpenLayers.Marker(lonLat));
+        
+        map.setCenter (lonLat, zoom);
+
+      }
+    };
+    xmlhttp.open("GET", "https://api.thingspeak.com/channels/1083228/feeds.json?api_key=ECFFTJ284AIP9F9U&results=1", true);
+    xmlhttp.send();
+
+    
+   
+  </script>
+  <script>
+    
+</script>
+</body></html>

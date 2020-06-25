@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+      	* {
+				margin: 0px;
+      }
+    .text{
+      margin: 5vh 0 5vh 10%;
+    }
+    #customers {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 80%;
+      margin: 0 0px 50px 10%;
+    }
+    
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+      color: black;
+    }
+    
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #customers tr:hover {background-color: #ddd;}
+    
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #da6d38;
+      color: white;
+    }
+    header {
+				background-color: #da6d38;
+				padding: 30px;
+				color: white;
+				font-family: sans-serif;
+				padding-left: 120px;
+				display: flex;
+			}
+
+			h1 {
+				text-transform: uppercase;
+			}
+			.header {
+				text-decoration: none;
+				color: white;
+				font-family: sans-serif;
+				font-size: 27px;
+				padding: 5px;
+				padding-left: 740px;
+			}
+
+    </style>
+    </head>
+<body>
+<meta http-equiv="refresh" content="60"/>
+<header>
+  <h1> fisherman safety </h1>
+  <a class="header" href="home.html"> Log Out </a> 
+</header>
+<div class="text">
+<h2>History</h2>
+<p><a href="index.html">Back to home</a></p>
+</div>
+<table id="customers" style="color: white;">
+    
+    
+  </table>
+
+
+<!-- <p id="demo"></p> -->
+<script>
+var xmlhttp = new XMLHttpRequest(), x ;
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var myObj = JSON.parse(this.responseText);
+    myObj.feeds.reverse();
+    x +="<tr> <th>S.No</th><th>Time</th> <th>"+myObj.channel.field1+"</th> <th>"+myObj.channel.field2+"</th><th>"+myObj.channel.field3+"</th>";
+    x +="<th>"+myObj.channel.field4+"</th><th>"+myObj.channel.field5+"</th><th>"+myObj.channel.field6+"</th></tr> ";
+    for (i in myObj.feeds)
+    {  
+      //  j = toint(i)+ 1
+        x += "<tr> <td>"+i+ "</td> <td>"+ myObj.feeds[i].created_at+ "</td>";
+        x += "<td>" + myObj.feeds[i].field1 + "</td>";
+        x += "<td>" + myObj.feeds[i].field2 + "</td>";
+        x += "<td>" + myObj.feeds[i].field3 + "</td>";
+        x += "<td>" + myObj.feeds[i].field4 + "</td>";
+        x += "<td>" + myObj.feeds[i].field5 + "mb</td>";
+        x += "<td>" + myObj.feeds[i].field6 + "°C</td>";
+
+    }
+    // document.getElementsByTagName("table").innerHTML =x;
+    document.getElementById("customers").innerHTML =x;
+    // document.getElementById("demo").innerHTML = myObj.channel.last_entry_id;
+  }
+};
+xmlhttp.open("GET", "https://api.thingspeak.com/channels/1083228/feeds.json?api_key=ECFFTJ284AIP9F9U&results=51", true);
+xmlhttp.send();
+</script>
+
+
+</body>
+</html>
