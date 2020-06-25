@@ -23,8 +23,8 @@
         </table>
     </div>
     </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="OpenLayers.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script>
     var xmlhttp = new XMLHttpRequest(), x ;
     var lat =0.0, lon=0.0;
@@ -33,7 +33,7 @@
         var myObj = JSON.parse(this.responseText);
         var Preassure=myObj.feeds[0].field5+"mb";
         var Temperature= myObj.feeds[0].field6+"°C";
-      var a=moment(myObj.feeds[i].created_at).utcOffset('+0530').format('YYYY-MM-DD HH:mm');
+      var a=moment(myObj.feeds[0].created_at).utcOffset('+0530').format('YYYY-MM-DD HH:mm');
         document.getElementById("updated_at").innerHTML=a;
         document.getElementById("Attendence").innerHTML=myObj.feeds[0].field1;
         document.getElementById("Terbulance").innerHTML=myObj.feeds[0].field2;
