@@ -79,7 +79,7 @@ xmlhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     var myObj = JSON.parse(this.responseText);
     myObj.feeds.reverse();
-    x +="<tr> <th>S.No</th><th>Time</th> <th>"+myObj.channel.field1+"</th> <th>"+myObj.channel.field2+"</th><th>"+myObj.channel.field3+"</th>";
+    x +="<tr> <th>S.No</th><th>Date</th><th>Time</th> <th>"+myObj.channel.field1+"</th> <th>"+myObj.channel.field2+"</th><th>"+myObj.channel.field3+"</th>";
     x +="<th>"+myObj.channel.field4+"</th><th>"+myObj.channel.field5+"</th><th>"+myObj.channel.field6+"</th></tr> ";
     for (i in myObj.feeds)
     {  
