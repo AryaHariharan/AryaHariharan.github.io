@@ -84,8 +84,10 @@ xmlhttp.onreadystatechange = function() {
     for (i in myObj.feeds)
     {  
       //  j = toint(i)+ 1
-      var a=moment(myObj.feeds[i].created_at).utcOffset('+0530').format('YYYY-MM-DD HH:mm');
-        x += "<tr> <td>"+i+ "</td> <td>"+a+ "</td>";
+      var a=moment(myObj.feeds[i].created_at).utcOffset('+0530').format('DD-MM-YYY');
+      var b=moment(myObj.feeds[i].created_at).utcOffset('+0530').format('HH:mm');
+        x += "<tr> <td>"+i+ "</td> <td>"+ a+ "</td>";
+        x += "<td>"+ b+ "</td>";
         x += "<td>" + myObj.feeds[i].field1 + "</td>";
         x += "<td>" + myObj.feeds[i].field2 + "</td>";
         x += "<td>" + myObj.feeds[i].field3 + "</td>";
